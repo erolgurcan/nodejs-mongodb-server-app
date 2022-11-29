@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 const userLogin = async (req, res) => {
   const { email, password } = req.body;
 
+  console.log(email, password)
+
   try {
     await mongoose.connect(config.mongo.url);
 
@@ -32,6 +34,8 @@ const userLogin = async (req, res) => {
 const userCreate = async (req, res) => {
 
   const { name, email, password, userType } = req.body;
+
+  console.log(name)
 
     if (!name || !email || !password || !userType) {
         return res.status(400).send("Please fill all fields");
