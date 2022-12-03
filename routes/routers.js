@@ -5,6 +5,8 @@ const {
   userLogin,
 } = require("../controllers/userRouter");
 
+const {addOrder} = require("../controllers/orderRouter");
+
 const { getBike, getBikeById } = require("../controllers/shopingRouter");
 
 router.post("/user/create", userCreate);
@@ -20,5 +22,7 @@ router.delete("/user/delete", (req, res) => {
 router.get("/shop/all", getBike);
 
 router.get("/shop/:id", getBikeById);
+
+router.post("/shop/add", addOrder)
 
 module.exports = router;

@@ -1,49 +1,36 @@
-const mongoose = require('mongoose');
-const config = require('../controllers/config');
-const Bike = require('../models/bike');
-const bikeDets = require('../models/bikeModel');
+const mongoose = require("mongoose");
+const config = require("../controllers/config");
+const Bike = require("../models/bike");
+const bikeDets = require("../models/bikeModel");
 
 const getBike = async (req, res) => {
+  try {
+    await mongoose.connect(config.mongo.url);
 
-    try {
+    const bike = await Bike.find({});
 
-        await mongoose.connect(config.mongo.url);
+    res.json(bike);
+  } catch (error) {
+    console.log(error);
 
-        const bike = await Bike.find({});
-
-        res.json(bike);
-
-    } catch (error) {
-
-        console.log(error);
-
-        res.status(400);
-
-    }
-
-}
+    res.status(400);
+  }
+};
 
 const getBikeById = async (req, res) => {
+  try {
+    await mongoose.connect(config.mongo.url);
 
-    try {
-            
-            await mongoose.connect(config.mongo.url);
-    
-            const bikeDetails = await bikeDets.find({id: req.params.id});
-    
-            res.json(bikeDetails);
+    const bikeDetails = await bikeDets.find({ id: req.params.id });
 
-    
-    }
-    catch (error) {
-        console.log(error);
-        res.status(400);
-    }
-}
-
-
+    res.json(bikeDetails);
+  } catch (error) {
+    console.log(error);
+    res.status(400);
+  }
+};
 
 module.exports = {
-    getBike,
-    getBikeById
-}
+  getBike,
+  getBikeById,
+};
