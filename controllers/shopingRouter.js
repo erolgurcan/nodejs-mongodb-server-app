@@ -20,9 +20,11 @@ const getBike = async (req, res) => {
 const getBikeById = async (req, res) => {
   try {
     await mongoose.connect(config.mongo.url);
+    console.log(req.params.id)
 
     const bikeDetails = await bikeDets.find({ id: req.params.id });
 
+    console.log(bikeDetails)
     res.json(bikeDetails);
   } catch (error) {
     console.log(error);
