@@ -1,7 +1,9 @@
+require("dotenv").config();
+
 module.exports = {
 
     mongo: {
-        url: 'mongodb://localhost:27017/mybikegeardb'
+        url: process.env.MONGODB_URL
     }
 
 }

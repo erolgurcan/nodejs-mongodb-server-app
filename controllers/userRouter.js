@@ -20,8 +20,18 @@ const userLogin = async (req, res) => {
 
     if (!validPass) return res.status(400).send("Password Wrong");
 
-    const token = jwt.sign({ _id: User._id }, "secret");
-    res.header("auth-token", token).send(token);
+    const token = jwt.sign({ _id: User._id, userType: userCheck.userType }, "secret");
+
+    res.header("auth-token", token).send({
+      token,
+      user: {
+        id: userCheck._id,
+        name: userCheck.name,
+        email: userCheck.email,
+        userType: userCheck.userType,
+      },
+
+    });
 
     res.send("Logged in");
 
